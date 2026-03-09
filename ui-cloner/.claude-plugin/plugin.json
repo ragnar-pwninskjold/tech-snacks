@@ -1,0 +1,11 @@
+{
+  "name": "ui-cloner",
+  "description": "Site Replication Intelligence Protocol (SRIP) — a 4-phase pipeline that forensically analyzes a target website and produces a one-shot replication prompt adapted to the user's brand identity",
+  "version": "1.0.0",
+  "author": {
+    "name": "ragnar-pwninskjold"
+  },
+  "repository": "https://github.com/ragnar-pwninskjold/tech-snacks",
+  "license": "MIT",
+  "keywords": ["ui-cloner", "design", "frontend", "replication", "site-clone", "skills"]
+}
