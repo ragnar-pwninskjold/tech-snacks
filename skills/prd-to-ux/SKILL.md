@@ -9,14 +9,14 @@ Take a PRD (or a raw product idea) and produce **tool-agnostic, concept-driven s
 
 Output describes design *intent*: what a screen is for, what's visible, how it feels. It does NOT emit Tailwind, component trees, or hex codes (unless the user explicitly supplies them).
 
-## Pipeline (6 steps, 2 optional)
+## Pipeline
 
-1. **PRD Shaping** *(optional)* — when no PRD exists. See `references/step-1-prd-shaping.md`.
-2. **Gate — PRD Validation** — required pass. See `references/prd-validation.md`.
-3. **UX Philosophy** *(required)* — 3 distinct philosophies, user picks. See `references/step-1-5-ux-philosophy.md`.
-4. **Feature & State Briefs** *(required)* — screens and states per feature. See `references/step-2-feature-states.md`.
-5. **Design Direction** *(optional)* — vibe brief, or shadcn-style default. See `references/step-3-design-direction.md` and `references/default-design-direction.md`.
-6. **Screen Prompts Export** *(required)* — one prompt block per screen × state. See `references/step-4-screen-prompts.md`.
+- **Step 1 — PRD Shaping** *(optional)* — when no PRD exists. See `references/step-1-prd-shaping.md`.
+- **Gate — PRD Validation** — required pass between Step 1 and Step 1.5. See `references/prd-validation.md`.
+- **Step 1.5 — UX Philosophy** *(required)* — 3 distinct philosophies, user picks. See `references/step-1-5-ux-philosophy.md`.
+- **Step 2 — Feature & State Briefs** *(required)* — screens and states per feature. See `references/step-2-feature-states.md`.
+- **Step 3 — Design Direction** *(optional)* — vibe brief, or shadcn-style default. See `references/step-3-design-direction.md` and `references/default-design-direction.md`.
+- **Step 4 — Screen Prompts Export** *(required)* — one prompt block per screen × state. See `references/step-4-screen-prompts.md`.
 
 The divergent→convergent pattern shared by Step 1 (features) and Step 1.5 (UX expressions) lives in `references/divergent-convergent-pattern.md`.
 
@@ -43,7 +43,7 @@ User invokes `/prd-to-ux` or references the skill, optionally passing a PRD file
 
 ## Opening Move
 
-1. Introduce the 6 stages briefly.
+1. Introduce the pipeline stages briefly (Step 1 through Step 4, plus the validation gate).
 2. Ask: **"Do you have a PRD, or should we build one from an idea?"**
 3. Check the target directory `docs/prd-to-ux/<today>-<proposed-slug>/` for existing artifacts.
    - **Directory exists with artifacts:** ask whether to resume at the next missing step or start fresh.
