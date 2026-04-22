@@ -1,6 +1,9 @@
 # Local-only working directory (not pushed)
 temp/
 
+# Git worktrees
+.worktrees/
+
 # Per-user Claude Code settings
 .claude/settings.local.json
 .claude-plugin/.credentials.json
