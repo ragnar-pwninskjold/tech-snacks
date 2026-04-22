@@ -1,0 +1,25 @@
+# Local-only working directory (not pushed)
+temp/
+
+# Per-user Claude Code settings
+.claude/settings.local.json
+.claude-plugin/.credentials.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Env
+.env
+.env.local
+.env*.local
+
+# Logs
+*.log

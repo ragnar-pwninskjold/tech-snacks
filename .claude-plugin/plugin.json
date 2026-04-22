@@ -1,0 +1,12 @@
+{
+  "name": "tech-snacks",
+  "version": "0.1.0",
+  "description": "A skill library for people that make stuff",
+  "author": {
+    "name": "Sean Kochel"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/seankochel/tech-snacks",
+  "repository": "https://github.com/seankochel/tech-snacks",
+  "keywords": ["skills", "claude-code", "agents", "ai"]
+}
