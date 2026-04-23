@@ -1,8 +1,3 @@
----
-name: ui-cloner-synthesis
-description: Use when Site DNA and all 12 brand interview answers are in hand and it's time to generate the final replication prompt. Phase 3 of SRIP — applies 11 synthesis rules to produce a one-shot developer build prompt.
----
-
 # UI Cloner — Phase 3: Synthesis
 
 ## Overview
@@ -12,6 +7,8 @@ With the Site DNA and all 12 user answers in hand, generate the final replicatio
 **Announce:** "Phase 2 complete. Generating your custom replication prompt."
 
 **Read `AUDIT_MODE`** from the top of `plans/01-site-dna.md` before generating. High-Fidelity mode requires applying the EMBED principle (Rule 2). Standard mode uses pseudocode-level descriptions (Rules 4–5).
+
+The output artifact shape lives in `../templates/replication-prompt.template.md` — the 5-part hierarchy (Role / Design System / Component Architecture / Technical Requirements / Execution Directive) is canonical.
 
 **CRITICAL OPERATING PRINCIPLE — "EMBED, DON'T REWRITE" (High-Fidelity mode only)**
 Your job is to transplant structured artifacts from the Site DNA DIRECTLY into the output prompt — with only brand variables substituted. This preserves fidelity. Every time you abstract or summarize instead of embedding precisely, fidelity is permanently lost.
@@ -137,20 +134,9 @@ Preserve the voice pattern, replace the substance.
 
 ## Rule 10 — Technical Requirements Section
 
-End the component architecture with an explicit technical requirements block:
+End the component architecture with an explicit technical requirements block. Use the `TECHNICAL REQUIREMENTS` block scaffold in `../templates/replication-prompt.template.md`.
 
-```
-TECHNICAL REQUIREMENTS
-  Stack:                [exact user-specified stack — framework, language, component library]
-  Animation:            [library + version if known, e.g., GSAP 3.12]
-  Scroll:               [scroll library if needed, e.g., GSAP ScrollTrigger / Lenis]
-  Animation Lifecycle:  [e.g., "Use gsap.context() scoped to component ref inside useEffect; return context.revert() on cleanup"]
-  Scroll Trigger Setup: [e.g., "Register ScrollTrigger plugin. Use trigger:'[selector]', start:'top 80%', end:'top 20%', scrub:true for parallax"]
-  Hover Implementation: [e.g., "All buttons: overflow-hidden with ::before pseudo-element, translateX(-100%)→translateX(0) on hover, 300ms ease-out"]
-  Custom Cursor:        [if applicable — cursor behavior and implementation]
-  Font Loading:         [e.g., "Load via Google Fonts: Plus Jakarta Sans 400,700,800 + Cormorant Garamond 300,300italic"]
-  Image Sources:        [real Unsplash URLs matching aesthetic specified by user, or user-provided asset references — no placeholders]
-```
+Fields (all required): Stack, Animation, Scroll, Animation Lifecycle, Scroll Trigger Setup, Hover Implementation, Custom Cursor (if applicable), Font Loading, Image Sources.
 
 ## Rule 11 — Execution Directive
 
@@ -167,6 +153,6 @@ Examples:
 
 ## After Generating
 
-**Save output:** Write the full generated replication prompt to `plans/03-replication-prompt.md` in the current project directory.
+**Save output:** Write the full generated replication prompt to `plans/03-replication-prompt.md` following `../templates/replication-prompt.template.md`.
 
-**When complete:** Invoke **ui-cloner-quality-check** to run Phase 4 before delivery.
+**When complete:** Return control to the orchestrator (`../SKILL.md`) to run Phase 4 before delivery.

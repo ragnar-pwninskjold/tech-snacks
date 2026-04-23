@@ -27,26 +27,20 @@ tech-snacks/
 │       └── skills/              # All skills live here as peer directories
 │           ├── ui-cloner/
 │           │   ├── SKILL.md
-│           │   ├── scripts/
-│           │   └── references/
-│           ├── ui-cloner-brand-interview/
-│           ├── ui-cloner-forensic-audit/
-│           ├── ui-cloner-iterator/
-│           ├── ui-cloner-quality-check/
-│           ├── ui-cloner-synthesis/
+│           │   ├── references/  # Phase-by-phase procedures
+│           │   ├── templates/   # Canonical output artifact shapes
+│           │   └── examples/    # Worked examples for high-fidelity blocks
 │           └── prd-to-ux/
+│               ├── SKILL.md
+│               ├── references/
+│               └── templates/
 ├── LICENSE
 └── README.md
 ```
 
 ## Skills
 
-- **ui-cloner** — Site Replication Intelligence Protocol (SRIP) entry point. Orchestrates the full 4-phase pipeline for cloning a target site's UI.
-- **ui-cloner-forensic-audit** — Phase 1: forensic analysis of the target site, producing a Site DNA document.
-- **ui-cloner-brand-interview** — Phase 2: collects the 12 brand questions.
-- **ui-cloner-synthesis** — Phase 3: fuses Site DNA + brand answers into a one-shot replication prompt.
-- **ui-cloner-quality-check** — Phase 4: validates the final prompt against the fidelity checklist.
-- **ui-cloner-iterator** — Post-build loop for dialing in fidelity after a weak replication attempt.
+- **ui-cloner** — Site Replication Intelligence Protocol (SRIP). Full 4-phase pipeline for cloning a target site's UI: forensic audit → brand interview → synthesis → quality check, plus a post-build iterator for dialing in fidelity. Each phase is defined by an internal reference file under `references/`, with output shapes in `templates/` and worked examples in `examples/`.
 - **prd-to-ux** — translate a PRD or product idea into tool-agnostic screen prompts for web UX generators (Stitch, Figma AI, Pencil, Claude Design).
 
 ## Adding a Skill
