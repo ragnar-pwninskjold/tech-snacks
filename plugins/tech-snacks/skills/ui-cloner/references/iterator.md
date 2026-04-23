@@ -1,8 +1,3 @@
----
-name: ui-cloner-iterator
-description: Use when a UI cloning attempt produced a poor or incomplete result and needs to be improved iteratively. Runs 5 structured comparison loops between the current implementation and the Site DNA to produce corrective prompts that progressively dial in fidelity.
----
-
 # UI Cloner — Iterator: Refinement Loop
 
 ## Overview
@@ -12,6 +7,8 @@ Takes a poorly-executed first attempt and systematically closes the gap to the r
 **Announce:** "Running the UI Cloner Iterator — 5 refinement passes against the Site DNA."
 
 **Prerequisite:** `plans/01-site-dna.md` must exist in the current project directory. Read it before starting Pass 1.
+
+The output artifact shape (5 passes + master summary) lives in `../templates/iterator.template.md`.
 
 ---
 
@@ -91,20 +88,7 @@ Check against Site DNA sections: 1.9 (Copywriting Voice), 1.2 (typography italic
 
 ## Output Format Per Pass
 
-```
-## Pass [N] — [Focus Area]
-
-### Gaps Identified
-- [CRITICAL] [description of gap vs. Site DNA reference]
-- [MAJOR] [description of gap]
-- [MINOR] [description of gap]
-
-### Corrective Prompt
-
-[The precise, paste-ready corrective prompt for this pass]
-
----
-```
+Use the per-pass block scaffold in `../templates/iterator.template.md`. Each pass produces: gaps identified (with severity tags), corrective prompt (paste-ready), and a transition note for the next pass.
 
 ---
 
@@ -115,7 +99,7 @@ After completing all 5 passes, output a **Master Correction Summary**:
 1. A ranked list of all gaps addressed across all 5 passes
 2. A single consolidated "Final Dial-In Prompt" that combines the most critical unfixed items into one comprehensive corrective instruction
 
-**Save output:** Write the full iterator output (all 5 passes + master summary) to `plans/05-iterator.md` in the current project directory.
+**Save output:** Write the full iterator output (all 5 passes + master summary) to `plans/05-iterator.md` following `../templates/iterator.template.md`.
 
 ---
 

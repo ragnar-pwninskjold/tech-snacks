@@ -1,8 +1,3 @@
----
-name: ui-cloner-quality-check
-description: Use after generating a UI replication prompt to verify it meets all quality standards before delivery. Phase 4 of SRIP — runs a multi-domain fidelity checklist and patches any missing elements before outputting the final prompt.
----
-
 # UI Cloner — Phase 4: Quality Self-Check
 
 ## Overview
@@ -12,6 +7,8 @@ Before delivering the final prompt, run through the full fidelity checklist belo
 **Announce:** "Running Phase 4 — Quality Self-Check before delivery."
 
 **Read `AUDIT_MODE`** from `plans/01-site-dna.md`. High-Fidelity mode must pass all 5 fidelity domains. Standard mode must pass the Core Checklist.
+
+The output artifact shape (verified final prompt) lives in `../templates/final-prompt.template.md`.
 
 ---
 
@@ -108,6 +105,6 @@ Do not deliver until all applicable items are checked.
 
 Once all applicable items pass:
 
-1. **Save output:** Write the final verified prompt to `plans/04-final-prompt.md` in the current project directory.
+1. **Save output:** Write the final verified prompt to `plans/04-final-prompt.md` following `../templates/final-prompt.template.md`.
 2. Output the complete final prompt in a single fenced code block so the user can copy and paste it cleanly.
 3. Confirm: "Your replication prompt is ready. Paste it into Claude or your preferred code generation tool to build the site. All phase outputs are saved in `plans/`."

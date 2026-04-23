@@ -1,8 +1,3 @@
----
-name: ui-cloner-brand-interview
-description: Use when Phase 1 forensic audit is complete and it's time to collect brand information from the user. Phase 2 of SRIP — presents all 12 brand questions in a single message and waits for answers before proceeding.
----
-
 # UI Cloner — Phase 2: Brand Interview
 
 ## Overview
@@ -12,6 +7,8 @@ After completing the Site DNA, present ALL 12 questions to the user in a **singl
 **Announce:** "Phase 1 complete. Moving to Phase 2 — Brand Interview."
 
 **Critical rule:** Ask all 12 questions at once. Do not drip them one at a time.
+
+The interview block below is the canonical question set. The output shape (captured answers) lives in `../templates/brand-interview.template.md`.
 
 ---
 
@@ -75,6 +72,6 @@ Also list any sections you want **ADDED** that don't exist in the reference site
 
 Confirm you have all 12 answers. If any are missing or too vague to act on, ask for clarification on only those specific questions.
 
-**Save output:** Write the user's 12 answers (with question labels) to `plans/02-brand-interview.md` in the current project directory.
+**Save output:** Write the user's 12 answers (with question labels) to `plans/02-brand-interview.md` following `../templates/brand-interview.template.md`.
 
-**When complete:** Invoke **ui-cloner-synthesis** to begin Phase 3.
+**When complete:** Return control to the orchestrator (`../SKILL.md`) to proceed with Phase 3.

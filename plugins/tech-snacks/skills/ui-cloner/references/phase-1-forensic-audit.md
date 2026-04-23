@@ -1,8 +1,3 @@
----
-name: ui-cloner-forensic-audit
-description: Use when performing a forensic analysis of a target website as part of the UI cloning pipeline. Phase 1 of SRIP — runs steps 1.1 through 1.9 and produces a Site DNA document.
----
-
 # UI Cloner — Phase 1: Forensic Site Audit
 
 ## Overview
@@ -11,7 +6,9 @@ Analyze the target URL with clinical precision across 9 audit steps. The output 
 
 **Announce:** "Running Phase 1 — Forensic Site Audit on [URL] in [Standard / High-Fidelity] Mode."
 
-**Read the `AUDIT_MODE` flag** from `plans/01-site-dna.md` (set by the entry skill). If `AUDIT_MODE: high-fidelity`, use the **High-Fidelity** output formats below for every step. If `AUDIT_MODE: standard`, use the **Standard** output formats.
+**Read the `AUDIT_MODE` flag** from `plans/01-site-dna.md` (set by the orchestrator). If `AUDIT_MODE: high-fidelity`, use the **High-Fidelity** output formats below for every step. If `AUDIT_MODE: standard`, use the **Standard** output formats.
+
+The overall shape of the output artifact lives in `../templates/site-dna.template.md`. Fill that scaffold as you complete each step.
 
 ---
 
@@ -56,23 +53,7 @@ Use `<section>` tags as section boundaries if the site has 3+ of them. Otherwise
 
 **Standard:** Document total section count, grid philosophy (full-bleed? constrained? asymmetric?), whitespace rhythm, section stacking logic, and approximate aspect ratios.
 
-**High-Fidelity:** Produce a vertical ASCII wireframe of the ENTIRE page:
-
-```
-PAGE ARCHITECTURE: [Site Name] — [URL]
-Total viewport sections: [N]
-╔══════════════════════════════════════════════════════╗
-║  SECTION 1: [Name]                    HEIGHT: [100vh/auto/Xpx]  ║
-║  BG: [solid #hex / gradient / image+overlay]         ║
-║  LAYOUT: [full-bleed / max-w-Xpx centered / asymmetric] ║
-╠══════════════════════════════════════════════════════╣
-║  SECTION 2: [Name]                    HEIGHT: [...]  ║
-║  BG: [...]                                           ║
-║  LAYOUT: [...]                                       ║
-╠══════════════════════════════════════════════════════╣
-[... repeat for all sections ...]
-╚══════════════════════════════════════════════════════╝
-```
+**High-Fidelity:** Produce a vertical ASCII wireframe of the ENTIRE page. Use the `PAGE ARCHITECTURE` block scaffold in `../templates/site-dna.template.md`.
 
 Note any OVERLAPPING sections (negative margins, absolute positioning bleeding between sections).
 
@@ -107,33 +88,9 @@ allElements.forEach(el => fonts.add(getComputedStyle(el).fontFamily));
 console.log([...fonts].join('\n'));
 ```
 
-Produce this structured token document:
+Fill the `DESIGN TOKENS` block in `../templates/site-dna.template.md` with every captured value.
 
-```
-DESIGN TOKENS
-─────────────────────────────────────────────────────
-PALETTE:
-  [Semantic Name] "[Word Name]":  #XXXXXX / rgb(X,X,X)   → [where used: e.g., "section backgrounds, card fills"]
-  [... all colors ...]
-
-TYPOGRAPHY SCALE:
-  [Role]     | Font Family              | Weight | Size          | Tracking    | Line-Height | Style
-  ──────────────────────────────────────────────────────────────────────────────────────────
-  Display    | [font name]              | [wt]   | clamp(X,Xvw,X)| [em/px]    | [ratio]     | [italic?]
-  Heading 1  | [font name]              | [wt]   | [rem]         | [em]        | [ratio]     | normal
-  Heading 2  | [font name]              | [wt]   | [rem]         | [em]        | [ratio]     | normal
-  Body       | [font name]              | [wt]   | [rem]         | [em]        | [ratio]     | normal
-  Label      | [font name]              | [wt]   | [rem]         | [em]        | [ratio]     | uppercase
-  Mono/Data  | [font name]              | [wt]   | [rem]         | [em]        | [ratio]     | normal
-  ⚑ DRAMA NOTES: [Describe the KEY typographic contrast that creates visual impact. e.g., "The juxtaposition of 800-weight sans at 3rem with 300-weight serif italic at 9rem IS the hero's drama. Do not lose this ratio."]
-
-SPACING GRID: Base unit = [Xpx]. Scale: [list: 4, 8, 16, 24, 32, 48, 64, 96...]
-BORDER RADIUS: [size]: [Xpx/rem] — used on [element type]
-               [size]: [Xpx/rem] — used on [element type]
-SHADOW SYSTEM: [level]: [full box-shadow value]
-TEXTURE: [noise overlay / grain / none — method + opacity]
-─────────────────────────────────────────────────────
-```
+The `⚑ DRAMA NOTES` field under TYPOGRAPHY SCALE is mandatory in HF mode — describe the KEY typographic contrast that creates visual impact (e.g., "The juxtaposition of 800-weight sans at 3rem with 300-weight serif italic at 9rem IS the hero's drama. Do not lose this ratio."). This ratio is the single highest-leverage detail to preserve through synthesis.
 
 ---
 
@@ -190,37 +147,7 @@ Object.entries(classCount).forEach(([cls, count]) => {
 
 If ANY orphan classes are found, or if any child has height >30% different from siblings, you MUST create a full wireframe and content map for that child as a named **SUB-SECTION** using the format `SECTION [N].[letter]: [NAME]`.
 
-**High-Fidelity:** For each section (and each discovered sub-section) produce TWO outputs:
-
-**A) INTERNAL ASCII WIREFRAME:**
-
-```
-SECTION [N]: [NAME]
-Height: [value] | BG: [treatment] | Padding: [top Xpx / sides Xpx]
-Content max-width: [Xpx or full-bleed]
-┌─────────────────────────────────────────────────────┐
-│                                                     │
-│  ┌──────────────────┐  ┌────────────────────────┐  │
-│  │  LEFT COLUMN     │  │  RIGHT COLUMN          │  │
-│  │  [~X% width]     │  │  [~X% width]           │  │
-│  │                  │  │                        │  │
-│  │  [element type]  │  │  [element type]        │  │
-│  │  [element type]  │  │                        │  │
-│  └──────────────────┘  └────────────────────────┘  │
-│                                                     │
-└─────────────────────────────────────────────────────┘
-Layout system: [CSS Grid: Xfr Xfr / Flexbox row / Flexbox col / Absolute]
-Gap: [Xpx/rem]
-```
-
-**B) TYPOGRAPHY + CONTENT MAP:**
-
-```
-CONTENT MAP: Section [N]
-  [element] → "[exact text or placeholder description]" | Style: [Display/H1/Body/Label] | Color: [token name]
-  [element] → "[...]" | Style: [...] | Color: [...]
-  [CTA/button] → "[label]" | Style: [...] | BG: [...] | Type: [primary/secondary/ghost]
-```
+**High-Fidelity:** For each section (and each discovered sub-section) produce both an INTERNAL ASCII WIREFRAME and a TYPOGRAPHY + CONTENT MAP using the `SECTION BLUEPRINT` block scaffold in `../templates/site-dna.template.md`.
 
 ---
 
@@ -237,27 +164,7 @@ CONTENT MAP: Section [N]
 
 1. Take a full-viewport screenshot of the section at its most visually complete state
 2. Identify EVERY distinct visual element in the composition — count them
-3. Produce a **COMPOSITION MAP** using this format:
-
-```
-COMPOSITION MAP: [Section Name]
-Element count: [N] distinct visual objects
-
-CENTER:    [primary element — device, illustration, etc.]
-           Size: [dimensions], Position: [centered/offset], Z-index: [front]
-
-BEHIND:    [background elements that create depth/spread]
-           Count: [N], Arrangement: [fanned/grid/scattered/radial]
-           Per-element: size, rotation, blur, opacity, position relative to center
-           Example: "4 app screenshot cards, 240x380px each, fanned in radial arc
-                     at -8deg/-4deg/+4deg/+8deg, blur(2px), opacity 0.25-0.3,
-                     positioned 60-120px from center"
-
-FLANKING:  [side elements at the same visual plane as center]
-ABOVE:     [overlapping elements in front of center]
-AMBIENT:   [atmospheric effects — gradients, glows, particles, halos]
-           Gradient specs: type, direction, color stops with exact values
-```
+3. Fill a **COMPOSITION MAP** using the block scaffold in `../templates/site-dna.template.md`. For a worked example of the level of detail required, see `../examples/site-dna.example.md` (Composition Map section) — specifically the treatment of element count, per-element blur/opacity/rotation, and spatial relationships.
 
 4. For Lottie/SVG/canvas elements specifically:
    - You CANNOT inspect internals via DOM queries — rely on the screenshot
@@ -276,21 +183,7 @@ AMBIENT:   [atmospheric effects — gradients, glows, particles, halos]
 
 **Standard:** Scroll slowly top to bottom. For each animation record: trigger type, target element, animation type (fade-up/scale-in/clip-reveal/etc.), duration estimate, easing feel, stagger offset.
 
-**High-Fidelity:** Use this exact timeline format for EVERY animated element:
-
-```
-ANIMATION: [Descriptive Name]
-Section: [which section]
-Trigger: [page-load / scroll-enter(top Xvh) / hover / click / auto-interval(Xms)]
-Library: [GSAP / CSS / Framer / unknown]
-TIMELINE:
-  t=0ms     [element name]   FROM: opacity:0, transform:translateY(30px)   → no change yet
-  t=200ms   [element name]   TO:   opacity:1, transform:translateY(0)      DURATION:600ms  EASING:ease-out
-  t=350ms   [element name]   TO:   opacity:1, transform:translateY(0)      DURATION:700ms  EASING:cubic-bezier(0.34,1.56,0.64,1)
-PROPERTIES ANIMATED: [opacity / transform / filter / clip-path / color / etc.]
-LOOP: [yes/no — if yes, describe loop behavior]
-RESET: [does it reset on scroll-out?]
-```
+**High-Fidelity:** Use the `ANIMATION TIMELINE` block scaffold in `../templates/site-dna.template.md` for EVERY animated element. Every timeline entry must include `t=Xms` notation, FROM → TO property values, duration, and easing.
 
 To find exact easing values: Elements panel → select animated element → Animations tab. Or console: `getComputedStyle(document.querySelector('[selector]')).transition`
 
@@ -307,21 +200,7 @@ When an animation is rendered by Lottie, complex SVG, or canvas — you cannot r
 
 **Standard:** Hover every interactive element. Document: nav hover states, button hover, card hover, custom cursor behavior, form focus states.
 
-**High-Fidelity:** For each interactive element, produce a property diff table:
-
-```
-INTERACTION: [Element Name / Type]
-Selector hint: [.class-name or describe location]
-STATE         | background              | color      | transform       | box-shadow                    | other
-──────────────────────────────────────────────────────────────────────────────────────────────────────────
-DEFAULT       | #XXXXXX                 | #XXXXXX    | scale(1)        | none                          | border: 1px solid #XXX
-HOVER         | #XXXXXX (slide from L)  | #XXXXXX    | scale(1.02)     | 0 8px 24px rgba(0,0,0,0.15)   | –
-ACTIVE/CLICK  | #XXXXXX                 | #XXXXXX    | scale(0.97)     | none                          | –
-FOCUS         | –                       | –          | –               | 0 0 0 3px rgba(X,X,X,0.3)    | –
-MECHANISM: [CSS transition / GSAP / pseudo-element slide / etc.]
-DURATION: [Xms]  EASING: [value or description]
-⚑ SPECIAL BEHAVIOR: [e.g., "overflow:hidden with ::before pseudo-element translating from -100% to 0 creates the background slide effect — NOT a color transition"]
-```
+**High-Fidelity:** For each interactive element, produce a property diff table using the `INTERACTION` block scaffold in `../templates/site-dna.template.md` — DEFAULT / HOVER / ACTIVE / FOCUS rows, with background, color, transform, box-shadow, and other columns. Always document the MECHANISM (pseudo-element slide? color transition? clip-path?) and `⚑ SPECIAL BEHAVIOR` note for non-obvious tricks (e.g., "overflow:hidden with ::before pseudo-element translating from -100% to 0 creates the background slide effect — NOT a color transition").
 
 ---
 
@@ -329,28 +208,7 @@ DURATION: [Xms]  EASING: [value or description]
 
 **Standard:** Document stateful/interactive components: carousels, accordions, tab systems, sticky elements, nav morphing, typewriter effects, number animations, cursor-following effects.
 
-**High-Fidelity:** For any component that cycles, toggles, or has internal state:
-
-```
-STATE MACHINE: [Component Name]
-Location: Section [N]
-Type: [Cycler / Toggle / Sequence / Morphing / Typewriter]
-STATES:
-  State A: [describe visual state — what's visible, what positions]
-  State B: [describe visual state]
-  State C: [if applicable]
-INITIAL STATE: [A/B/C]
-TRANSITION A→B:
-  Trigger: [user action / timer(Xms) / scroll position]
-  Element 1: [property] animates [from → to] over [Xms] with [easing]
-  Element 2: [property] animates [from → to] over [Xms] with [easing / delay: Xms]
-  Data logic: [e.g., "array.push(array.shift()) rotates items", "currentIndex = (currentIndex + 1) % items.length"]
-TRANSITION B→C: [same format]
-LOOP: [infinite / user-controlled / N times]
-INTERNAL LAYOUT:
-  Container: [dimensions, position, overflow]
-  Each state element: [dimensions, default position, z-index logic]
-```
+**High-Fidelity:** For any component that cycles, toggles, or has internal state, fill a `STATE MACHINE` block (scaffold in `../templates/site-dna.template.md`). Include: all states, initial state, transitions A→B / B→C with per-element animation specs and data logic (e.g., `array.push(array.shift())` rotation, `currentIndex = (currentIndex + 1) % items.length`), loop behavior, and internal layout specifics.
 
 ---
 
@@ -358,23 +216,7 @@ INTERNAL LAYOUT:
 
 **Standard:** Note parallax elements and their approximate scroll speed, sticky element thresholds, and nav state change trigger point.
 
-**High-Fidelity:** After scrolling the entire page, produce this scroll position → event map:
-
-```
-SCROLL CHOREOGRAPHY MAP
-─────────────────────────────────────────────────────────────────────
-Scroll %  │ Viewport Position    │ Event / Animation Trigger
-─────────────────────────────────────────────────────────────────────
-0%        │ Page load            │ [Hero animations begin]
-~X%       │ [element] enters vh  │ [what triggers]
-~X%       │ [element] enters vh  │ [what triggers]
-[...]
-─────────────────────────────────────────────────────────────────────
-SCROLL BEHAVIORS:
-  Parallax elements: [list elements and their scroll speed multiplier]
-  Sticky elements: [which elements, at what scroll position, when they unstick]
-  Nav state change: [exact scroll threshold where nav changes appearance]
-```
+**High-Fidelity:** After scrolling the entire page, fill the `SCROLL CHOREOGRAPHY MAP` block (scaffold in `../templates/site-dna.template.md`) with scroll % → viewport position → event/animation trigger rows, plus dedicated notes for parallax multipliers, sticky thresholds, and nav state-change scroll position.
 
 ---
 
@@ -403,16 +245,7 @@ document.querySelectorAll('script[src]').forEach(s => {
 });
 ```
 
-Document findings:
-
-```
-TECHNICAL STACK
-  Framework: [React/Vue/Svelte/Vanilla — confidence: high/medium/inferred]
-  Animation: [GSAP X.X / Framer Motion / CSS only / Anime.js / etc.]
-  Scroll:    [GSAP ScrollTrigger / Lenis / Locomotive / native]
-  UI Lib:    [Tailwind / CSS Modules / Styled Components / etc.]
-  Other:     [any other detected libraries]
-```
+Fill the `TECHNICAL STACK` block in `../templates/site-dna.template.md` with findings: framework (+ confidence), animation library (+ version), scroll library, UI lib, other.
 
 ---
 
@@ -420,26 +253,17 @@ TECHNICAL STACK
 
 **Standard:** Write 3–5 sentences describing the gestalt motion philosophy. Note copy tone, sentence length pattern, rhetorical devices, key structural patterns.
 
-**High-Fidelity:**
+**High-Fidelity:** Fill the `MOTION PHILOSOPHY` and `COPY VOICE PATTERN` blocks in `../templates/site-dna.template.md`.
 
-```
-MOTION PHILOSOPHY:
-[3–5 sentence gestalt description. Address: Is the motion physics-based (springy/weighted)?
-Cinematic (slow/deliberate)? Functional (fast/subtle)? What emotional state does the motion
-PRODUCE in the viewer? What would be lost if all animations were removed?]
+For **motion philosophy**: 3–5 sentence gestalt. Address: physics-based (springy/weighted)? Cinematic (slow/deliberate)? Functional (fast/subtle)? What emotional state does the motion PRODUCE in the viewer? What would be lost if all animations were removed?
 
-COPY VOICE PATTERN:
-  Tone:          [clinical / warm / bold / philosophical / conversational / provocative]
-  Sentence form: [fragments / full sentences / mix — with example]
-  Key device:    [contrast/paradox / direct address / aspirational / question-answer / etc.]
-  Example pattern: "[quote an actual structural pattern used, e.g., 'Modern X asks: Y. We ask: Z.']"
-```
+For **copy voice**: tone, sentence form, key rhetorical device, and quote an actual structural pattern used (e.g., "Modern X asks: Y. We ask: Z.").
 
 ---
 
 ## Output: Site DNA Document
 
-Compile all findings into a structured block titled `## SITE DNA` before proceeding.
+Compile all findings into a structured block titled `## SITE DNA` following `../templates/site-dna.template.md`.
 
 **Standard mode:** Format clearly with all extracted values — hex codes, timing estimates, named components, verbatim copy samples.
 
@@ -447,4 +271,4 @@ Compile all findings into a structured block titled `## SITE DNA` before proceed
 
 **Save output:** Write the full Site DNA (with `AUDIT_MODE` flag at top) to `plans/01-site-dna.md` in the current project directory. Create the `plans/` directory if it doesn't exist.
 
-**When complete:** Invoke **ui-cloner-brand-interview** to begin Phase 2.
+**When complete:** Return control to the orchestrator (`../SKILL.md`) to proceed with Phase 2.
