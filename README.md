@@ -19,18 +19,22 @@ Or clone locally and point Claude Code at the directory.
 ```
 tech-snacks/
 ├── .claude-plugin/
-│   ├── marketplace.json         # Marketplace catalog (for /plugin marketplace add)
-│   └── plugin.json              # Plugin manifest
-├── skills/                      # All skills live here as peer directories
-│   ├── ui-cloner/
-│   │   ├── SKILL.md
-│   │   ├── scripts/
-│   │   └── references/
-│   ├── ui-cloner-brand-interview/
-│   ├── ui-cloner-forensic-audit/
-│   ├── ui-cloner-iterator/
-│   ├── ui-cloner-quality-check/
-│   └── ui-cloner-synthesis/
+│   └── marketplace.json         # Marketplace catalog (for /plugin marketplace add)
+├── plugins/
+│   └── tech-snacks/             # The plugin itself
+│       ├── .claude-plugin/
+│       │   └── plugin.json      # Plugin manifest
+│       └── skills/              # All skills live here as peer directories
+│           ├── ui-cloner/
+│           │   ├── SKILL.md
+│           │   ├── scripts/
+│           │   └── references/
+│           ├── ui-cloner-brand-interview/
+│           ├── ui-cloner-forensic-audit/
+│           ├── ui-cloner-iterator/
+│           ├── ui-cloner-quality-check/
+│           ├── ui-cloner-synthesis/
+│           └── prd-to-ux/
 ├── LICENSE
 └── README.md
 ```
@@ -47,7 +51,7 @@ tech-snacks/
 
 ## Adding a Skill
 
-1. Create `skills/<skill-name>/SKILL.md` with YAML frontmatter:
+1. Create `plugins/tech-snacks/skills/<skill-name>/SKILL.md` with YAML frontmatter:
    ```yaml
    ---
    name: skill-name
@@ -56,7 +60,7 @@ tech-snacks/
    ```
 2. Optionally add `scripts/`, `references/`, `assets/` alongside `SKILL.md`.
 3. Skill name must match the directory (kebab-case, `^[a-z0-9]+(-[a-z0-9]+)*$`).
-4. Compound skills live as peer directories in `skills/` — do not nest them.
+4. Compound skills live as peer directories in `plugins/tech-snacks/skills/` — do not nest them.
 
 ## License
 

@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "tech-snacks",
-      "source": ".",
+      "source": "./plugins/tech-snacks",
       "description": "A skill library for people that make stuff",
       "version": "0.1.0"
     }
