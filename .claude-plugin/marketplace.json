@@ -1,0 +1,14 @@
+{
+  "name": "tech-snacks",
+  "owner": {
+    "name": "Sean Kochel"
+  },
+  "plugins": [
+    {
+      "name": "tech-snacks",
+      "source": ".",
+      "description": "A skill library for people that make stuff",
+      "version": "0.1.0"
+    }
+  ]
+}

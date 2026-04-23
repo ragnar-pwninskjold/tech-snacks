@@ -8,7 +8,8 @@ A [Claude Code plugin](https://code.claude.com/docs/en/plugins-reference) bundli
 
 ```bash
 # In Claude Code
-/plugin install ragnar-pwninskjold/tech-snacks
+/plugin marketplace add ragnar-pwninskjold/tech-snacks
+/plugin install tech-snacks@tech-snacks
 ```
 
 Or clone locally and point Claude Code at the directory.
@@ -18,6 +19,7 @@ Or clone locally and point Claude Code at the directory.
 ```
 tech-snacks/
 ├── .claude-plugin/
+│   ├── marketplace.json         # Marketplace catalog (for /plugin marketplace add)
 │   └── plugin.json              # Plugin manifest
 ├── skills/                      # All skills live here as peer directories
 │   ├── ui-cloner/
