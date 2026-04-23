@@ -1,127 +1,58 @@
 ---
 name: ui-cloner
-description: Placeholder skill scaffolded from the template. Replace with the actual ui-cloner workflow.
-metadata:
-  category: template
-  difficulty: beginner
-  version: 0.1.0
+description: Use when user provides a URL and wants to replicate or clone a website's UI, design, or visual style for their own product. Entry point for the full 4-phase SRIP pipeline.
 ---
 
-# UI Cloner
+# UI Cloner — Site Replication Intelligence Protocol (SRIP)
 
-Placeholder skill. Replace this content with the actual ui-cloner workflow.
+## Overview
 
-## Use When
+You are a Senior Creative Technologist and UI Forensics Expert. Your mission: analyze a target website with clinical precision, interview the user about their brand, and synthesize a one-shot replication prompt a developer can execute to build a pixel-faithful recreation adapted to the user's identity.
 
-- Creating a new agent skill from scratch
-- Learning the Agent Skills format
-- Understanding skill best practices
-- Referencing proper YAML frontmatter structure
+**Announce at start:** "I'm using the ui-cloner skill to run the Site Replication Intelligence Protocol."
 
-## Instructions
+## Pipeline
 
-When creating a new skill, follow these guidelines:
+Run the 4 phases in strict order. Each phase has its own skill.
 
-### 1. Skill Naming
-
-Choose a descriptive, kebab-case name that clearly indicates the skill's purpose:
-- Use lowercase letters and numbers only
-- Separate words with single hyphens
-- Keep it concise (1-64 characters)
-- Examples: `react-best-practices`, `api-design-patterns`, `git-workflow`
-
-### 2. Required Components
-
-Every skill MUST include:
-- A `SKILL.md` file with valid YAML frontmatter
-- A `name` field matching the directory name
-- A `description` field (1-1024 characters)
-
-### 3. Optional Components
-
-Enhance your skill with:
-- **scripts/**: Executable automation for deterministic tasks
-- **references/**: Detailed documentation loaded on-demand
-- **assets/**: Templates, examples, configuration files
-
-### 4. Writing Effective Instructions
-
-Make instructions:
-- **Actionable**: Use clear imperatives (e.g., "Use X when Y", "Implement Z")
-- **Specific**: Provide concrete examples and patterns
-- **Concise**: Keep the main SKILL.md focused; move details to references/
-- **Searchable**: Include keywords agents can grep for
-
-### 5. Progressive Disclosure
-
-For complex topics:
-1. Provide a brief overview in SKILL.md
-2. Include search patterns for finding detailed info
-3. Move comprehensive documentation to references/
-4. Keep agent context lightweight by default
-
-## Example Usage
-
-When an agent loads this skill, it will:
-1. Read the YAML frontmatter for metadata
-2. Parse the markdown instructions
-3. Discover optional scripts and references
-4. Apply the guidelines to its task
-
-## Script Guidelines
-
-If adding scripts to `scripts/`:
-- Make them executable (`chmod +x script.sh`)
-- Include error handling
-- Add usage documentation
-- Review them like production code
-- Prefer scripts over natural language for consistency
-
-## Reference Guidelines
-
-If adding references to `references/`:
-- Use clear, descriptive filenames
-- Structure content with headers for greppability
-- Avoid duplicating content from SKILL.md
-- Link from SKILL.md with search patterns
-
-## Testing Your Skill
-
-Validate your skill by:
-1. Checking YAML frontmatter syntax
-2. Ensuring directory name matches the `name` field
-3. Verifying description length (1-1024 chars)
-4. Testing with multiple agents when possible
-5. Confirming scripts are executable and functional
-
-## Common Patterns
-
-**Use When Section**: Always start with clear use cases
-```markdown
-## Use When
-
-- Implementing feature X
-- Debugging issue Y
-- Following pattern Z
+```
+Phase 1 → ui-cloner-forensic-audit   (analyze the target URL)
+Phase 2 → ui-cloner-brand-interview  (interview the user)
+Phase 3 → ui-cloner-synthesis        (generate the replication prompt)
+Phase 4 → ui-cloner-quality-check    (verify before delivery)
 ```
 
-**Progressive References**:
-```markdown
-For detailed API documentation, search references/api-guide.md for "Authentication"
+## Plans Directory
+
+Each phase saves its output as a markdown file inside a `plans/` directory in the current project directory (wherever the user is working). Create the directory if it doesn't exist.
+
+```
+plans/
+  01-site-dna.md             ← Phase 1 output
+  02-brand-interview.md      ← Phase 2 output
+  03-replication-prompt.md   ← Phase 3 output
+  04-final-prompt.md         ← Phase 4 output
+  05-iterator.md             ← Iterator output (if refinement needed)
 ```
 
-**Script Integration**:
-```markdown
-To automate this process, run:
-`./scripts/setup.sh`
-```
+## Refinement (Post-Pipeline)
 
-## Additional Resources
+If the developer's first build attempt is poor or incomplete, invoke **ui-cloner-iterator**. It runs 5 structured passes comparing the current implementation against the Site DNA, producing targeted corrective prompts for each pass.
 
-- [Agent Skills FAQ](https://vercel.com/blog/agent-skills-explained-an-faq)
-- [Vercel Agent Skills Repo](https://github.com/vercel-labs/agent-skills)
-- [Skills CLI](https://github.com/vercel-labs/skills)
+## Audit Modes
 
-## License
+Before starting Phase 1, ask the user which audit mode they want:
 
-MIT
+**Standard Mode** — Narrative descriptions of layout, tokens, animations, and interactions. Fast. Good for inspiration and general direction.
+
+**High-Fidelity Mode** — Structured artifacts: ASCII wireframes, `t=Xms` animation timelines, property diff tables, state machines, scroll choreography maps. Slower but produces implementation-precision output. Required when the goal is a pixel-faithful clone.
+
+Announce the selected mode: `"Running [Standard / High-Fidelity] Mode audit on [URL]."`
+
+Store the mode selection as `AUDIT_MODE: standard | high-fidelity` at the top of `plans/01-site-dna.md`. The forensic audit skill uses this flag to determine output format.
+
+## Activation
+
+When given a URL, ask for audit mode selection, then immediately invoke **ui-cloner-forensic-audit** to begin Phase 1.
+
+Do not ask any other clarifying questions first.
