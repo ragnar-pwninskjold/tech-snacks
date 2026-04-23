@@ -41,6 +41,7 @@ tech-snacks/
 - **ui-cloner-synthesis** — Phase 3: fuses Site DNA + brand answers into a one-shot replication prompt.
 - **ui-cloner-quality-check** — Phase 4: validates the final prompt against the fidelity checklist.
 - **ui-cloner-iterator** — Post-build loop for dialing in fidelity after a weak replication attempt.
+- **prd-to-ux** — translate a PRD or product idea into tool-agnostic screen prompts for web UX generators (Stitch, Figma AI, Pencil, Claude Design).
 
 ## Adding a Skill
 
