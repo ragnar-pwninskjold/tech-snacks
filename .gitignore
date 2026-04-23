@@ -1,5 +1,6 @@
 # Local-only working directory (not pushed)
 temp/
+docs/
 
 # Git worktrees
 .worktrees/
