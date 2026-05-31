@@ -29,6 +29,8 @@ Inspect the question and current context:
 - Both signals, or genuinely ambiguous -> **both**.
 - Pure general-topic with no repo angle -> **web only** (do not waste a repo scan).
 
+Also read the **audience tier** from the question. DEFAULT to `builder` and bias toward `simple` — recommend the simplest tool that clears the bar, not the most rigorous one. Escalate to `expert` ONLY on explicit signals: "ML team", "production-grade", "at scale", "I already use X", named low-level libraries, researcher-depth framing. Signals like "assume X is solved, I just care about Y" or "I want to ship" mean: stay simple, give one clear path. Pass the tier to the web researcher in Step 3.
+
 ## Step 2 — Escalation gate (local-first)
 
 If repo mode ran:
@@ -44,7 +46,7 @@ Dispatch the selected agents in a SINGLE message so they run concurrently (Task 
 - web mode -> `tech-snacks:research:caveman-web-researcher`
 - both -> both, in parallel.
 
-Pass each agent the topic (cleaned of flags).
+Pass each agent the topic (cleaned of flags). Pass the web researcher the audience tier from Step 1 so it surfaces the right depth of tools (simple/builder = batteries-included; expert = composable stacks ok).
 
 ## Step 4 — Verify pass (only if --verify)
 
@@ -56,10 +58,12 @@ Each `caveman-web-researcher` recommendation is already a self-contained claim. 
 ## Step 5 — Render
 
 Read these two files and follow them exactly:
-- `references/voice-spec.md` — how it reads (Big Truth First is mandatory).
+- `references/voice-spec.md` — the voice TRANSFORM (not a description — apply it). Big Truth First is mandatory.
 - `references/output-format.md` — the section skeleton.
 
-Crush the reconciled research digest into the response. Apply the Auto-Clarity Exception from the voice spec for any security warning, irreversible action, or ordered sequence.
+The digest you got from the researchers is verbose. Do NOT echo its register. **Transform** it through the voice spec — drop articles/filler/hedging, force fragments, lead with the Big Truth. Then run the voice spec's **pre-output check** before sending: if sentences read full and smooth like a report, you drifted — rewrite them. Keep the researcher's per-job 2-3-option structure; do not re-expand it into a buffet.
+
+Apply the Auto-Clarity Exception from the voice spec for any security warning, irreversible action, or ordered sequence.
 
 ## Step 6 — Output
 
