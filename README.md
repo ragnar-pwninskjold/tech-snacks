@@ -24,6 +24,8 @@ tech-snacks/
 │   └── tech-snacks/             # The plugin itself
 │       ├── .claude-plugin/
 │       │   └── plugin.json      # Plugin manifest
+│       ├── agents/              # Plugin agents (dispatched via Task)
+│       │   └── research/        # caveman-search's research agents
 │       └── skills/              # All skills live here as peer directories
 │           ├── ui-cloner/
 │           │   ├── SKILL.md
@@ -44,6 +46,7 @@ tech-snacks/
 - **prd-to-ux** — translate a PRD or product idea into tool-agnostic screen prompts for web UX generators (Stitch, Figma AI, Pencil, Claude Design).
 - **scaffold-claude** — interview the user to scaffold a project-level CLAUDE.md / AGENTS.md, capturing edge cases and tribal knowledge.
 - **intent-layer** — set up hierarchical AGENTS.md infrastructure so agents navigate codebases like senior engineers. _Vendored from [crafter-station/skills](https://github.com/crafter-station/skills/tree/main/context-engineering/intent-layer) — see [Credits](#credits)._
+- **caveman-search** — terse, research-backed answers to tech/tooling questions. Runs Compound-Engineering-style decomposed research (local repo + live web), verifies, and renders in a compressed "caveman" voice that leads with the load-bearing truth. Backed by three research agents in `agents/research/`.
 
 ## Adding a Skill
 
