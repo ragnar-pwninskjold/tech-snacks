@@ -48,6 +48,8 @@ tech-snacks/
 - **ui-cloner-quality-check** — Phase 4: validates the final prompt against the fidelity checklist.
 - **ui-cloner-iterator** — Post-build loop for dialing in fidelity after a weak replication attempt.
 - **prd-to-ux** — translate a PRD or product idea into tool-agnostic screen prompts for web UX generators (Stitch, Figma AI, Pencil, Claude Design).
+- **scaffold-claude** — interview the user to scaffold a project-level CLAUDE.md / AGENTS.md, capturing edge cases and tribal knowledge.
+- **intent-layer** — set up hierarchical AGENTS.md infrastructure so agents navigate codebases like senior engineers. _Vendored from [crafter-station/skills](https://github.com/crafter-station/skills/tree/main/context-engineering/intent-layer) — see [Credits](#credits)._
 
 ## Adding a Skill
 
@@ -62,6 +64,10 @@ tech-snacks/
 3. Skill name must match the directory (kebab-case, `^[a-z0-9]+(-[a-z0-9]+)*$`).
 4. Compound skills live as peer directories in `plugins/tech-snacks/skills/` — do not nest them.
 
+## Credits
+
+- **intent-layer** is vendored from [crafter-station/skills](https://github.com/crafter-station/skills/tree/main/context-engineering/intent-layer) (MIT, © 2026 Crafter Station). Built by [Railly Hugo](https://railly.dev) for [Crafter Station](https://crafterstation.com), based on [The Intent Layer](https://www.intent-systems.com/learn/intent-layer) by Tyler Brandt. Its upstream license is preserved at `plugins/tech-snacks/skills/intent-layer/LICENSE`.
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE). Vendored skills retain their original licenses alongside their source (see [Credits](#credits)).
