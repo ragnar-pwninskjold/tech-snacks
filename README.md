@@ -19,23 +19,47 @@ Or clone locally and point Claude Code at the directory.
 ```
 tech-snacks/
 ├── .claude-plugin/
-│   └── marketplace.json         # Marketplace catalog (for /plugin marketplace add)
+│   └── marketplace.json              # Marketplace catalog (for /plugin marketplace add)
+├── .github/
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── plugins/
-│   └── tech-snacks/             # The plugin itself
+│   └── tech-snacks/                  # The plugin itself
 │       ├── .claude-plugin/
-│       │   └── plugin.json      # Plugin manifest
-│       ├── agents/              # Plugin agents (dispatched via Task)
-│       │   └── research/        # caveman-search's research agents
-│       └── skills/              # All skills live here as peer directories
+│       │   └── plugin.json           # Plugin manifest (version lives here)
+│       ├── agents/                   # Plugin agents (dispatched via Task)
+│       │   └── research/             # caveman-search's research agents
+│       │       ├── caveman-repo-scout.md
+│       │       ├── caveman-verifier.md
+│       │       └── caveman-web-researcher.md
+│       ├── workflows/                # Multi-agent workflow scripts (.workflow.js)
+│       │   ├── mine-claude-md-from-sessions.workflow.js
+│       │   └── react-refactor-tournament.workflow.js
+│       └── skills/                   # All skills live here as peer directories
 │           ├── ui-cloner/
 │           │   ├── SKILL.md
-│           │   ├── references/  # Phase-by-phase procedures
-│           │   ├── templates/   # Canonical output artifact shapes
-│           │   └── examples/    # Worked examples for high-fidelity blocks
-│           └── prd-to-ux/
-│               ├── SKILL.md
-│               ├── references/
-│               └── templates/
+│           │   ├── references/       # Phase-by-phase procedures
+│           │   ├── templates/        # Canonical output artifact shapes
+│           │   └── examples/         # Worked examples for high-fidelity blocks
+│           ├── prd-to-ux/
+│           │   ├── SKILL.md
+│           │   ├── references/
+│           │   └── templates/
+│           ├── scaffold-claude/
+│           │   ├── SKILL.md
+│           │   ├── references/
+│           │   └── templates/
+│           ├── intent-layer/         # Vendored (see Credits)
+│           │   ├── SKILL.md
+│           │   ├── LICENSE
+│           │   ├── references/
+│           │   └── scripts/
+│           ├── caveman-search/
+│           │   ├── SKILL.md
+│           │   └── references/
+│           ├── mine-claude-md/
+│           │   └── SKILL.md          # Wraps the mine-claude-md-from-sessions workflow
+│           └── react-refactor-tournament/
+│               └── SKILL.md          # Wraps the react-refactor-tournament workflow
 ├── LICENSE
 └── README.md
 ```
@@ -47,6 +71,8 @@ tech-snacks/
 - **scaffold-claude** — interview the user to scaffold a project-level CLAUDE.md / AGENTS.md, capturing edge cases and tribal knowledge.
 - **intent-layer** — set up hierarchical AGENTS.md infrastructure so agents navigate codebases like senior engineers. _Vendored from [crafter-station/skills](https://github.com/crafter-station/skills/tree/main/context-engineering/intent-layer) — see [Credits](#credits)._
 - **caveman-search** — terse, research-backed answers to tech/tooling questions. Runs Compound-Engineering-style decomposed research (local repo + live web), verifies, and renders in a compressed "caveman" voice that leads with the load-bearing truth. Backed by three research agents in `agents/research/`.
+- **mine-claude-md** — mine recent Claude Code sessions for non-obvious, multi-file CLAUDE.md candidates, adversarially verify them, and propose paste-ready additions. Wraps the `mine-claude-md-from-sessions` workflow.
+- **react-refactor-tournament** — review React/Next.js code against the real `vercel-react-best-practices` skill, backlog the performance findings by rule id + impact tier, rank the most over-subscribed tiers, then fix + test the top N in isolated worktrees. Wraps the `react-refactor-tournament` workflow.
 
 ## Adding a Skill
 

@@ -8,6 +8,7 @@ docs/
 # Per-user Claude Code settings
 .claude/settings.local.json
 .claude-plugin/.credentials.json
+CLAUDE.local.md
 
 # OS
 .DS_Store
