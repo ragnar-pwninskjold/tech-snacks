@@ -44,6 +44,9 @@ tech-snacks/
 │           │   ├── SKILL.md
 │           │   ├── references/
 │           │   └── templates/
+│           ├── lite-prd/
+│           │   ├── SKILL.md
+│           │   └── references/       # Traversal protocol + PRD output template
 │           ├── scaffold-claude/
 │           │   ├── SKILL.md
 │           │   ├── references/
@@ -68,6 +71,7 @@ tech-snacks/
 
 - **ui-cloner** — Site Replication Intelligence Protocol (SRIP). Full 4-phase pipeline for cloning a target site's UI: forensic audit → brand interview → synthesis → quality check, plus a post-build iterator for dialing in fidelity. Each phase is defined by an internal reference file under `references/`, with output shapes in `templates/` and worked examples in `examples/`.
 - **prd-to-ux** — translate a PRD or product idea into tool-agnostic screen prompts for web UX generators (Stitch, Figma AI, Pencil, Claude Design).
+- **lite-prd** — turn a vague feature ask into a lightweight PRD by interviewing the user with `AskUserQuestion`, traversing a design tree (branching deeper when an answer opens new territory, `--deep` for exhaustive), persisting every Q&A round to `docs/lite-prd/<slug>/qa-log.md`, and emitting `lite-prd.md`.
 - **scaffold-claude** — interview the user to scaffold a project-level CLAUDE.md / AGENTS.md, capturing edge cases and tribal knowledge.
 - **intent-layer** — set up hierarchical AGENTS.md infrastructure so agents navigate codebases like senior engineers. _Vendored from [crafter-station/skills](https://github.com/crafter-station/skills/tree/main/context-engineering/intent-layer) — see [Credits](#credits)._
 - **caveman-search** — terse, research-backed answers to tech/tooling questions. Runs Compound-Engineering-style decomposed research (local repo + live web), verifies, and renders in a compressed "caveman" voice that leads with the load-bearing truth. Backed by three research agents in `agents/research/`.
