@@ -31,7 +31,8 @@ tech-snacks/
 │       │       ├── caveman-repo-scout.md
 │       │       ├── caveman-verifier.md
 │       │       └── caveman-web-researcher.md
-│       ├── workflows/                # Multi-agent workflow scripts (.workflow.js)
+│       ├── workflows/                # Multi-agent workflow scripts
+│       │   ├── epic-runner.js
 │       │   ├── mine-claude-md-from-sessions.workflow.js
 │       │   └── react-refactor-tournament.workflow.js
 │       └── skills/                   # All skills live here as peer directories
