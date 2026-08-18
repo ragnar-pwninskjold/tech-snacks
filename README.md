@@ -64,6 +64,10 @@ tech-snacks/
 │           │   └── SKILL.md          # Wraps the mine-claude-md-from-sessions workflow
 │           └── react-refactor-tournament/
 │               └── SKILL.md          # Wraps the react-refactor-tournament workflow
+├── prompts/                          # One-off prompts for specific use cases (not skills/plugins)
+│   └── opus-fixer/
+│       ├── README.md
+│       └── opus-fixer.md
 ├── LICENSE
 └── README.md
 ```
@@ -78,6 +82,12 @@ tech-snacks/
 - **caveman-search** — terse, research-backed answers to tech/tooling questions. Runs Compound-Engineering-style decomposed research (local repo + live web), verifies, and renders in a compressed "caveman" voice that leads with the load-bearing truth. Backed by three research agents in `agents/research/`.
 - **mine-claude-md** — mine recent Claude Code sessions for non-obvious, multi-file CLAUDE.md candidates, adversarially verify them, and propose paste-ready additions. Wraps the `mine-claude-md-from-sessions` workflow.
 - **react-refactor-tournament** — review React/Next.js code against the real `vercel-react-best-practices` skill, backlog the performance findings by rule id + impact tier, rank the most over-subscribed tiers, then fix + test the top N in isolated worktrees. Wraps the `react-refactor-tournament` workflow.
+
+## Prompts
+
+Unlike skills, prompts in `prompts/` are one-off, standalone files for a specific use case — not invoked through the plugin, not auto-discovered by Claude Code. Each is used manually, e.g. via `--append-system-prompt-file`.
+
+- **opus-fixer** — appends clear, concise, actionable communication rules to the system prompt. See `prompts/opus-fixer/README.md` for usage.
 
 ## Adding a Skill
 
